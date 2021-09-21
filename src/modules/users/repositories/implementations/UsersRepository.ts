@@ -18,18 +18,16 @@ export class UsersRepository implements IUsersRepository {
     .createQueryBuilder("users")
     .leftJoinAndSelect("users.games", "game")
     .where("users.id = :id", { id: user_id })
-    .getOne()
+    .getOne();
 
     return user!
-    // Complete usando ORM
   }
 
   async findAllUsersOrderedByFirstName(): Promise<User[]> {
     return this.repository
     .createQueryBuilder("users")
     .orderBy("users.first_name", "ASC")
-    .getMany(); 
-    // Complete usando raw query
+    .getMany();
   }
 
   async findUserByFullName({
@@ -40,7 +38,6 @@ export class UsersRepository implements IUsersRepository {
     .createQueryBuilder("users")
     .where("LOWER(users.first_name) = LOWER(:first_Name)", { first_Name: first_name })
     .andWhere("LOWER(users.last_name) = LOWER(:last_Name)", {last_Name: last_name })
-    .getMany(); 
-    // Complete usando raw query
+    .getMany();
   }
 }
